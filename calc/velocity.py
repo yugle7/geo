@@ -16,7 +16,7 @@ class Velocity:
         self.load()
 
     def load(self):
-        self.speed = list(enumerate([V_STOP, V_WALK, V_BIKE, V_BUS, V_CAR]))
+        self.speed = list(enumerate([STOP, WALK, BIKE, BUS, CAR]))
         self.n = len(self.speed) + 1
 
     # ---------------------------

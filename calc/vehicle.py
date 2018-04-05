@@ -19,7 +19,6 @@ from base.show import Show
 
 # ----------------------------------
 
-
 class Vehicle:
     s = {}  # вероятность способа перемещения
     q = 0.2  # минимальная вероятность перемещения
@@ -27,7 +26,7 @@ class Vehicle:
     f = []  # способы перемещения
     g = []  # места пересадок
 
-    url = MEDIA + 'moves/'
+    url = MEDIA + 'vehicle/'
 
     # ----------------------------------
 
@@ -35,9 +34,12 @@ class Vehicle:
         self.f = ['car', 'bus', 'walk', 'bike']
         self.g = ['park', 'stop', 'metro']
 
+    # ----------------------------------
+    # определение типа по карте
+
     def take(self):
         for q in self.f + self.g:
-            show = Show('moves/' + q + '.jpg')
+            show = Show(self.url + q + '.jpg')
 
             pix = show.image.load()
             d = 256 * 3
@@ -66,34 +68,35 @@ class Vehicle:
     # вероятность
 
     def walk(self, p, i):
-        if not i and any(q.v > V_WALK for q in p): return False
+        if not i and any(q.v > WALK for q in p): return False
         for q in p: q.f = 'walk'
 
     def bike(self, p, i):
-        if not i and any(q.v > V_BIKE for q in p): return False
+        if not i and any(q.v > BIKE for q in p): return False
         s = self.s['bike']
 
         n = len(p)
-        while i < n and p[i].v < V_WALK:
+        while i < n and p[i].v < WALK:
             p[i].f = 'walk'
             i += 1
         j = i
-        while j < n and (p[j] > V_WALK or s[p[j].s] > self.q):
+        while j < n and (p[j] > WALK or s[p[j].s] > self.q):
             p[j].f = 'bike'
             j += 1
 
         return j == n or self.bus(p, j)
 
     def bus(self, p, i):
-        if not i and any(q.v > V_BUS for q in p): return False
+        if not i and any(q.v > BUS for q in p):
+            return False
         s = self.s['bus']
 
         n = len(p)
-        while i < n and p[i].v < V_WALK:
+        while i < n and p[i].v < WALK:
             p[i].f = 'walk'
             i += 1
         j = i
-        while j < n and (p[j] > V_WALK or s[p[j].s] > self.q):
+        while j < n and (p[j] > WALK or s[p[j].s] > self.q):
             p[j].f = 'bus'
             j += 1
 
@@ -103,11 +106,11 @@ class Vehicle:
         s = self.s['car']
 
         n = len(p)
-        while i < n and p[i].v < V_WALK:
+        while i < n and p[i].v < WALK:
             p[i].f = 'walk'
             i += 1
         j = i
-        while j < n and (p[j] > V_WALK or s[p[j].s] > self.q):
+        while j < n and (p[j] > WALK or s[p[j].s] > self.q):
             p[j].f = 'car'
             j += 1
 
@@ -123,8 +126,8 @@ class Vehicle:
     # отображение
 
     def show(self):
-        for f in self.f:
-            show = Show('n.jpg')
+        for q in self.f + self.g:
+            show = Show(MEDIA + 'n.jpg')
             pix = show.image.load()
 
             for i in range(show.width):
@@ -137,15 +140,15 @@ class Vehicle:
                     y = int(MAP_ROWS * j / show.height)
                     s = y * MAP_COLS + x
 
-                    q = 1 - self.s[f][s]
+                    k = 1 - self.s[q][s]
 
-                    a = a * q
-                    b = b * q
-                    c = c * q
+                    a = a * k
+                    b = b * k
+                    c = c * k
 
                     show.draw.point((i, j), (int(a), int(b), int(c)))
 
-            show.save('moves/' + f + '.png')
+            show.save(self.url + q + '.png')
 
     # ----------------------------------
 
@@ -161,14 +164,13 @@ class Vehicle:
             self.s[q] = list(map(float, src.read().split('\t')))
             src.close()
 
+    # ----------------------------------
 
-# ----------------------------------
-
-def demo(self):
-    self.take()
-    self.save()
-    self.load()
-    self.show()
+    def demo(self):
+        self.take()
+        self.save()
+        self.load()
+        self.show()
 
 
 # ----------------------------------

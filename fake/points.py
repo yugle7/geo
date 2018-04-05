@@ -113,7 +113,7 @@ class Points:
     # создание треков человека
 
     def find(self, i):
-        t = TIME_NOW + randint(0, self.t)  # время первого трека
+        t = NOW + randint(0, self.t)  # время первого трека
         m = randint(1, self.m)  # количество треков
 
         d = self.t // m  # время между треками

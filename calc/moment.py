@@ -1,13 +1,16 @@
 # момент времени
 
 from datetime import date, datetime
+from base.const import MEDIA
 
 
 # ---------------------------
 
 class Moment:
-    holiday = []
+    holiday = set()
     n = 8 * 24
+
+    url = MEDIA + 'moment/'
 
     # ---------------------------
 
@@ -15,13 +18,12 @@ class Moment:
         self.load()
 
     def load(self):
-        self.holiday = [
-            date(2018, 3, 8),
-            date(2018, 3, 9),
-            date(2018, 2, 23),
-            date(2018, 2, 24),
-            date(2017, 7, 14),
-        ]
+        p = open(self.url + 'holiday.txt').read().split()
+        self.holiday.clear()
+
+        for q in p:
+            year, month, day = q.split('-')
+            self.holiday.add(date(int(year), int(month), int(day)))
 
     # ---------------------------
     # определяет момент времени

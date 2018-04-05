@@ -115,7 +115,7 @@ class Attract:
 
     def take(self):
         p = []
-        t = TIME_NOW
+        t = NOW
 
         for q in open('media/location.txt'):
             y, x, n, r = q[:-1].split('\t')

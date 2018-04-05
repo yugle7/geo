@@ -1,6 +1,6 @@
 # область поиска в форме круга
 
-from base.const import BLUE, BLACK, GREEN, RED
+from base.const import BLUE, BLACK, GREEN, RED, MEDIA
 from base.logic import dist
 from base.point import Point
 from base.show import Show
@@ -11,6 +11,8 @@ from base.show import Show
 class Circle:
     x = y = 0  # координаты
     r = 0  # радиус
+
+    url = MEDIA + 'area/'
 
     # ---------------------------
 
@@ -36,21 +38,23 @@ class Circle:
     # тестовое отображение
 
     def take(self):
-        self.r = 200
-        self.y, self.x = 55.821098, 37.640564
+        x, y, r = open(self.url + 'circle.txt').readline().split()
+        self.x, self.y, self.r = float(x), float(y), int(r)
 
         p = []
 
-        for q in open('media/points.txt'):
+        for q in open(self.url + 'points.txt'):
             x, y = q[:-1].split('\t')
             p.append(Point(float(x), float(y)))
 
         return p
 
+    # ---------------------------
+
     def demo(self):
         print('circle')
 
-        show = Show('n.jpg')
+        show = Show(self.url + 'map.jpg')
         p = self.take()
 
         for q in p:
@@ -58,4 +62,5 @@ class Circle:
             q.show(show, t, None)
 
         self.show(show)
-        show.save('area/circle.jpg')
+        show.save(self.url + 'circle.jpg')
+        exit()

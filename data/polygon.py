@@ -2,7 +2,7 @@
 
 from cmath import atan
 
-from base.const import GREEN, RED, BLACK, BLUE
+from base.const import GREEN, RED, BLACK, BLUE, MEDIA
 from base.point import Point
 from base.show import Show
 from data.square import Square
@@ -19,6 +19,8 @@ present = Present()
 class Polygon:
     p = []
     e = 0.0001
+
+    url = MEDIA + 'area/'
 
     # ---------------------------
     # точка внутри полигона
@@ -63,13 +65,13 @@ class Polygon:
 
     def take(self):
         self.p = []
-        for q in open('media/polygon.txt'):
+        for q in open(self.url + 'polygon.txt'):
             x, y = q[:-1].split('\t')
             self.p.append(Point(float(x), float(y)))
 
         p = []
 
-        for q in open('media/points.txt'):
+        for q in open(self.url + 'points.txt'):
             x, y = q[:-1].split('\t')
             p.append(Point(float(x), float(y)))
 
@@ -78,7 +80,7 @@ class Polygon:
     def demo(self):
         print('polygon')
 
-        show = Show('n.jpg')
+        show = Show(self.url + 'map.jpg')
         p = self.take()
 
         for q in p:
@@ -86,4 +88,5 @@ class Polygon:
             q.show(show, t)
 
         self.show(show)
-        show.save('area/polygon.jpg')
+        show.save(self.url + 'polygon.jpg')
+        exit()

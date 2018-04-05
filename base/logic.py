@@ -7,11 +7,21 @@ from base.const import *
 # ---------------------------
 # определение квадрата точки
 
-def square(q):
+def xy2s(q):
     x = int((q.x - MAP_X) / MAP_DX)
     y = int((q.y - MAP_Y) / MAP_DY)
     q.s = y * MAP_COLS + x
     assert 0 <= q.s < MAP_N
+
+
+def s2xy(s):
+    assert 0 <= s < MAP_N
+    y, x = divmod(s, MAP_COLS)
+
+    x = (x * MAP_DX + MAP_DX / 2) + MAP_X
+    y = MAP_Y - (y * MAP_DY + MAP_DY / 2)
+
+    return x, y
 
 
 # ---------------------------

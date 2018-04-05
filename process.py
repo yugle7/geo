@@ -1,7 +1,7 @@
 # основной алгоритм получения и обработки данных
 
 from base.mongo import *
-from base.logic import square, span
+from base.logic import xy2s, span
 
 from data.person import Person
 from data.position import Position
@@ -57,7 +57,7 @@ class Process:
     # обработка трека
 
     def track(self, p):
-        for q in p: square(q)  # находим квадрат
+        for q in p: xy2s(q)  # находим квадрат
 
         outlier.make(p)  # удаляем выбросы
         prune.make(p)  # прореживаем

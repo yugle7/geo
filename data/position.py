@@ -1,6 +1,6 @@
 # точка с координатами
 
-from base.logic import square
+from base.logic import xy2s
 
 
 # ---------------------------
@@ -30,7 +30,7 @@ class Position:
         self.t = self.a = self.b = t
         self.r = r
 
-        square(self)
+        xy2s(self)
 
     # ---------------------------
 

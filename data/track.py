@@ -1,6 +1,6 @@
 # трек человека
 
-from base.const import GREEN, BLACK
+from base.const import GREEN, BLACK, MEDIA
 from base.show import Show
 from calc.moment import moment
 from calc.vehicle import vehicle
@@ -24,6 +24,8 @@ outlier = Outlier()
 
 class Track:
     p = []  # последовательность точек
+
+    url = MEDIA + 'track/'
 
     # ---------------------------
 
@@ -51,7 +53,7 @@ class Track:
     def take(self):
         self.p = []
 
-        for q in open('media/track.txt'):
+        for q in open(self.url + 'track.txt'):
             y, x, t, r = q[:-1].split('\t')
             x, y = float(x), float(y)
             t = int(t)
@@ -65,7 +67,7 @@ class Track:
         print('track')
 
         self.take()
-        show = Show('n.jpg')
+        show = Show(self.url + 'map.jpg')
 
         self.show(show)
         self.make()
@@ -74,5 +76,5 @@ class Track:
         for q in self.p:
             show.point(q, BLACK)
 
-        show.save('track.jpg')
+        show.save(self.url + 'track.jpg')
         exit()
