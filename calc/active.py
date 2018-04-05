@@ -77,6 +77,7 @@ class Active:
 
         t = []
 
+
         for g in self.g:
             x = y = 0
 
