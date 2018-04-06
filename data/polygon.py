@@ -24,14 +24,10 @@ class Polygon:
         s = 0
 
         c = self.p[-1]
-        a, b = Square(), Square()
-
-        b.x = c.x - q.x
-        b.y = c.y - q.y
+        b = Point(c.x - q.x, c.y - q.y)
 
         for c in self.p:
-            a.x = c.x - q.x
-            a.y = c.y - q.y
+            a = Point(c.x - q.x, c.y - q.y)
 
             d = b.x * a.y - a.x * b.y
             xy = a.x * b.x + a.y * b.y
