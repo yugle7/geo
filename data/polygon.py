@@ -5,13 +5,6 @@ from cmath import atan
 from base.const import GREEN, RED, BLACK, BLUE, MEDIA
 from base.point import Point
 from base.show import Show
-from data.square import Square
-from make.present import Present
-
-# ---------------------------
-
-
-present = Present()
 
 
 # ---------------------------
