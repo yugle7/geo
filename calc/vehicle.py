@@ -21,7 +21,7 @@ from base.show import Show
 
 class Vehicle:
     s = {}  # вероятность способа перемещения
-    q = 0.2  # минимальная вероятность перемещения
+    d = 0.2  # минимальная вероятность перемещения
 
     f = []  # способы перемещения
     g = []  # места пересадок
@@ -80,7 +80,7 @@ class Vehicle:
             p[i].f = 'walk'
             i += 1
         j = i
-        while j < n and (p[j] > WALK or s[p[j].s] > self.q):
+        while j < n and (p[j] > WALK or s[p[j].s] > self.d):
             p[j].f = 'bike'
             j += 1
 
@@ -96,7 +96,7 @@ class Vehicle:
             p[i].f = 'walk'
             i += 1
         j = i
-        while j < n and (p[j] > WALK or s[p[j].s] > self.q):
+        while j < n and (p[j] > WALK or s[p[j].s] > self.d):
             p[j].f = 'bus'
             j += 1
 
@@ -110,7 +110,7 @@ class Vehicle:
             p[i].f = 'walk'
             i += 1
         j = i
-        while j < n and (p[j] > WALK or s[p[j].s] > self.q):
+        while j < n and (p[j] > WALK or s[p[j].s] > self.d):
             p[j].f = 'car'
             j += 1
 

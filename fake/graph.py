@@ -32,14 +32,14 @@ class Graph:
                     continue
 
                 d = []
-                for r, k in n:
-                    b = a + k
+                for r, s in n:
+                    b = a + s
 
                     if 0 <= b < MAP_N and p[b] > self.p:
-                        d.append((k, a, b))
+                        d.append((r, a, b))
 
                 d.sort(reverse=True)
-                for l, a, b in d[:self.m]:
+                for r, a, b in d[: self.m]:
                     e[a].append(b)
 
             self.e[f] = e

@@ -24,9 +24,7 @@ from base.show import Show
 
 class Active:
     s = {}  # вероятность места и активности
-
-    a = {}  # если позиция в точке притяжения
-    b = {}  # в другом месте
+    d = {}  # человек в точке притяжения или в другом месте
 
     f = []  # типы местности
     g = []  # типы активности
@@ -72,8 +70,8 @@ class Active:
     # ----------------------------------
     # определяем место точки притяжения
 
-    def find(self, i, c, p, place):
-        s, place.f = max((self.s[f][place.s], f) for f in self.f)
+    def find(self, i, c, p, q):
+        s, q.f = max((self.s[f][q.s], f) for f in self.f)
 
         t = []
 
@@ -88,7 +86,7 @@ class Active:
 
             t.append((x - y, g))
 
-        s, place.g = max(t)
+        s, q.g = max(t)
 
     # ----------------------------------
     # отображение

@@ -34,17 +34,6 @@ class Position:
 
     # ---------------------------
 
-    def to_dict(self):
-        return {
-            'i': self.i,
-            'x': self.x,
-            'y': self.y,
-            't': self.t,
-            'r': self.r,
-        }
-
-    # ---------------------------
-
     def weight(self):
         self.w = 10 / (10 + self.r)
 

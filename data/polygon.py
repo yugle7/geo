@@ -66,6 +66,8 @@ class Polygon:
 
         return p
 
+    # ---------------------------
+
     def demo(self):
         print('polygon')
 
